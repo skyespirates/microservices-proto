@@ -1,0 +1,20 @@
+syntax="proto3";
+option go_package="github.com/skyespirates/microservices-proto/golang/order";
+
+service Order {
+    rpc Create(CreateOrderRequest) returns (CreateOrderResponse);
+}
+
+message CreateOrderRequest {
+    int64 user_id = 1;
+    repeated Item items = 2;
+    float total_price = 3;
+}
+
+message CreateOrderResponse {
+    int64 order_id = 1;
+}
+
+message Item {
+    string name = 1;
+}
