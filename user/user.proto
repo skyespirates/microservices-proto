@@ -1,0 +1,40 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package="github.com/skyespirates/microservices-proto/golang/user";
+
+message FileData {
+    string filename = 1;
+    bytes content = 2;
+}
+
+enum Status {
+    STATUS_UNKNOWN = 0; // default
+    STATUS_ACTIVE = 1;
+    STATUS_INACTIVE = 2;
+    STATUS_DELETED = 3;
+}
+
+message UserProfile {
+    int64 id = 1;
+    string username = 2;
+    Status status = 3;
+    repeated FileData files = 4;
+    map<string, string> preferences = 5;
+}
+
+message UserId {
+    int64 id = 1;
+}
+
+message UserProfileList {
+    repeated UserProfile users = 1;
+}
+
+service User {
+    rpc GetUserById(UserId) returns (UserProfile) {}
+    rpc GetUserList(google.protobuf.Empty) returns (UserProfileList) {}
+}
+
+

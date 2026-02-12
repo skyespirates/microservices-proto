@@ -1,0 +1,31 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package="github.com/skyespirates/microservices-proto/golang/todo";
+
+message CreateTodoRequest {
+    string title = 1;
+}
+
+message TodoItem {
+    int64 id = 1;
+    string title = 2;
+    bool completed = 3;
+}
+
+message TodoId {
+    int64 id = 1;
+}
+
+message TodoListResponse {
+    repeated TodoItem todos = 1;
+}
+
+
+
+service Todo {
+    rpc CreateTodo(CreateTodoRequest) returns (TodoItem) {};
+    rpc GetTodoById(TodoId) returns (TodoItem) {};
+    rpc GetTodoList(google.protobuf.Empty) returns (TodoListResponse) {};
+}

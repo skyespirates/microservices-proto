@@ -1,0 +1,31 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+
+option go_package="github.com/skyespirates/microservices-proto/golang/ayam";
+
+message AyamRequest {
+    int64 ayam_id = 1;
+    string ayam_name = 2;
+    float ayam_height = 3;
+    float ayam_weight = 4;
+}
+
+message AyamResponse {
+    int64 ayam_id = 1;
+    string ayam_name = 2;
+    float ayam_price = 3;
+    int64 ayam_number = 4;
+    int64 ayam_total = 5;
+}
+
+message AyamListResponse {
+    repeated AyamResponse items = 1;
+}
+
+service Ayam {
+    rpc GetAyamByName(AyamRequest) returns (AyamResponse) {}
+    rpc GetAyamList(google.protobuf.Empty) returns (AyamListResponse) {}
+    rpc CreateAyam(AyamRequest) returns (google.protobuf.Empty) {}
+}
